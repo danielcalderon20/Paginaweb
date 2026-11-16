@@ -1,0 +1,26 @@
+ANTES DE BUSCAR COMPAÑÍA · CARPETA COMPLETA CON IA PARA VERCEL
+
+¿QUÉ CONTIENE ESTA CARPETA?
+- index.html: página completa de la tesis. Todas las fotos están integradas en el propio HTML (data:image). No necesitas subir imágenes por separado.
+- api/preguntar.js: función privada de Vercel para responder preguntas usando IA real.
+- package.json: configuración mínima necesaria para el código del servidor.
+- IDPYBA.pdf y IDPYBA_2.pdf: documentos educativos enlazados desde la página. Estos sí son archivos independientes, porque son documentos PDF y no imágenes.
+
+PARA PUBLICAR O ACTUALIZAR TU PÁGINA
+1. Descomprime el ZIP que recibiste.
+2. Copia TODO el contenido de esta carpeta a la raíz de tu repositorio Pagina en GitHub, conservando la estructura. El archivo index.html y la carpeta api deben quedar en el mismo nivel. Si ya había un index.html, reemplázalo.
+3. En Vercel, importa el repositorio Pagina (si ya está conectado, el cambio se publicará cuando actualices GitHub). Selecciona Framework Preset: Other. No hace falta Build Command.
+4. En el panel de Vercel entra a AI Gateway y crea una clave de API para esta página. Recomiendo fijar un presupuesto de consumo para evitar gastos inesperados.
+5. En el proyecto, abre Settings > Environment Variables y crea AI_GATEWAY_API_KEY con el valor de la clave. Selecciona Production y Preview si quieres probar en ambos entornos. Nunca escribas la clave en index.html, en preguntar.js ni en GitHub.
+6. Haz un nuevo despliegue (Deployments > Redeploy) para que Vercel cargue la variable.
+7. Abre tu dominio; en la sección de preguntas, prueba una consulta. Si responde con la etiqueta «Respuesta generada con inteligencia artificial», ya está funcionando. Si no hay clave, hay un error o se agota el crédito, aparece el contenido educativo de respaldo de la web, claramente identificado como tal.
+8. Si tienes el sitio abierto con caché antigua, recarga forzada desde el navegador.
+
+AJUSTES OPCIONALES
+- Puedes cambiar el modelo de IA creando una variable AI_MODEL (el código usa por defecto openai/gpt-4.1-mini).
+- Para una web pública con mucho tráfico, añade límites de solicitudes a nivel de Vercel Firewall u otra solución persistente. El límite básico incluido en la función se mantiene solamente por instancia del servidor.
+
+IMPORTANTE
+- Las FOTOS están incrustadas en index.html, sin carpetas externas de imágenes. El ZIP incluye PDFs aparte porque la página los enlaza para consultar o descargar.
+- La IA no funciona con respuestas reales al abrir index.html directamente desde tu computador: necesita publicarse en Vercel y tener AI_GATEWAY_API_KEY activa. El contenido local de respaldo sí funciona desde el archivo HTML.
+- La IA y el servicio externo pueden tener interrupciones o límites de consumo; ningún proveedor puede garantizar disponibilidad permanente.
